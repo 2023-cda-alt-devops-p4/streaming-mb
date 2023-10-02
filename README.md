@@ -1,18 +1,19 @@
 # Plateforme de streaming
 
-Stocker et manipuler des données dans une base de données.
-
+Concevoir une BDD. Stocker des données, les manipuler.
 ![img_svg](./img/movies.svg)
 
 ## Contexte du projet
 
-J'envisage de créer un site où les utilisateurs, dans un premier temps, pourront se connecter pour faire différentes opérations de recherches à propos de films, d'acteurs/actrices ou de réalisateurs.
+En tant que développeur passionné par le cinéma, vous avez toujours été fasciné par la magie du grand écran. Cette passion ne se limite pas seulement à regarder des films. Vous avez toujours été curieux de connaître les coulisses, d'étudier qui a joué dans tel film, qui l'a réalisé, et comment ces chefs-d'œuvre ont été créés. Vous trouvez aussi que les plateformes de streaming sont un formidable accès à un catalogue d'oeuvres de toute sorte à découvrir.
 
-Seul l'administrateur pourra ajouter, modifier ou supprimer des données. Pour chaque entrée dans la base de données, il y aura la date de création et de modification.
+Vous avez donc envie de créer, vous aussi, votre propre plateforme de streaming sur votre temps libre.
 
-Mais la partie site web n'est pas pour tout de suite 😃
+Mais comme Rome ne s'est pas construite en un jour, vous voulez commencer par la mise en place d'un site web permettant de procéder à différentes opérations de recherches à propos de films, d'acteurs/actrices ou de réalisateurs.
 
-Avant celà, j'ai besoin d'une base de données pour le stockage.
+Sauf que. La partie site web n'est pas pour tout de suite 😃
+
+Avant celà, vous avez besoin d'une base de données pour le stockage. Et donc de la concevoir et la mettre en place!
 
 A vous de jouer 🙂
 
@@ -47,12 +48,21 @@ Voici un jeu de requêtes minimal à fournir pour tester votre bdd :
 - supprimer un acteur/actrice
 - afficher les 3 derniers acteurs/actrices ajouté(e)s
 
+Nous avons aussi besoin de manipulations avancées:
+- Lister grâce à une procédure stockée les films d'un réalisateur donné en paramètre
+- Garder grâce à un trigger une trace de toutes les modifications apportées à la table des utilisateurs. Ainsi, une table d'archive conservera la date de la mise à jour, l'identifiant de l'utilisateur concerné, l'ancienne valeur ainsi que la nouvelle.
+
 A placer dans le *README.md*.
 ​
 ### Contraintes
 
-- créez votre environnement Docker
-- mettre en place un *trigger*, également appelé déclencheur
+- Le noSQL (MongoDB...) n'est pas autorisé
+- Vous devez créer votre propre environnement Docker
+- Un *trigger* doit être mis en place, également appelé déclencheur
+
+- Seul l'administrateur de la BDD pourra ajouter, modifier ou supprimer des données. 
+- Pour chaque entrée dans la base de données, il y aura la date de création et de modification.
+
 
 ### Deadline
 
@@ -61,7 +71,7 @@ A placer dans le *README.md*.
 ## Modalités d'évaluation
 
 Correction entre pairs.  
-Vos requêtes seront testées en local après l'importation de votre environnemnt avec docker.
+Vos requêtes seront testées en local après l'importation de votre environnemnt docker.
 
 ## Livrables
 
@@ -76,11 +86,11 @@ Un dépôt GitHub contenant :
 
 ## Critères de performance
 
-- pouvoir récupérer facilement votre environnement
-- relations présentes entre les tables
-- un *trigger* mis en place
-- une bonne présentation des requêtes sur le *README.md*
-- les requêtes s'executent sans erreur
+- Récupération facile de votre environnement
+- Exactitude des relations entre les tables
+- *Trigger* mis en place
+- Bonne présentation des requêtes sur le *README.md*
+- Exécution des requêtes sans erreur
 
 ## Ressources
 
@@ -91,5 +101,5 @@ Un dépôt GitHub contenant :
 ## Auteurs, contributeurs
 
 * [Nicolas Herbez](https://github.com/nicolas-herbez)
-* [Cyril Marcq](https://github.com/CyrilMarcq)
 * [Jean-Baptiste Lavisse](https://github.com/jblavisse)
+* [Cyril Marcq](https://github.com/CyrilMarcq)
