@@ -3,6 +3,20 @@
 Concevoir une BDD. Stocker des données, les manipuler.
 ![img_svg](./img/movies.svg)
 
+## Installation d'une base de données avec Docker
+
+#1: Création d'un conteneur Docker
+
+- Définir le nom du conteneur
+sudo docker run --name streaming_container -e MYSQL_ROOT_PASSWORD=1234-pw -d mysql
+
+-Accèder à la liste des conteneurs
+-sudo docker ps
+
+-Accès au conteneur streaming_container
+sudo docker exec -it streaming_container mysql --password
+
+
 ## Contexte du projet
 
 En tant que développeur passionné par le cinéma, vous avez toujours été fasciné par la magie du grand écran. Cette passion ne se limite pas seulement à regarder des films. Vous avez toujours été curieux de connaître les coulisses, d'étudier qui a joué dans tel film, qui l'a réalisé, et comment ces chefs-d'œuvre ont été créés. Vous trouvez aussi que les plateformes de streaming sont un formidable accès à un catalogue d'oeuvres de toute sorte à découvrir.
@@ -23,16 +37,16 @@ A vous de jouer 🙂
 
 ### Structure de la base de donnée
 
-*Les films*  
+*Les films*
 Un film comporte un titre, un ou plusieurs acteurs, un réalisateur, une durée et l'année de sa sortie.
 
-*Les acteurs, actrices*  
+*Les acteurs, actrices*
 Nom, prénom, rôle et date de naissance.
 
-*Les réalisateurs*  
+*Les réalisateurs*
 Nom et prénom.
 
-*Les utilisateurs*  
+*Les utilisateurs*
 Nom, prénom, email, mot de passe, rôle et liste des films préférés.
 
 ### Les requêtes
@@ -60,7 +74,7 @@ A placer dans le *README.md*.
 - Vous devez créer votre propre environnement Docker
 - Un *trigger* doit être mis en place, également appelé déclencheur
 
-- Seul l'administrateur de la BDD pourra ajouter, modifier ou supprimer des données. 
+- Seul l'administrateur de la BDD pourra ajouter, modifier ou supprimer des données.
 - Pour chaque entrée dans la base de données, il y aura la date de création et de modification.
 
 
@@ -70,7 +84,7 @@ A placer dans le *README.md*.
 
 ## Modalités d'évaluation
 
-Correction entre pairs.  
+Correction entre pairs.
 Vos requêtes seront testées en local après l'importation de votre environnemnt docker.
 
 ## Livrables
