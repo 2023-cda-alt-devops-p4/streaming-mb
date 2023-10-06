@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - streaming_db:/var/lib/mysql
+    ports:
+      - '4406:3306'
+
+volumes:
+  streaming_db:
