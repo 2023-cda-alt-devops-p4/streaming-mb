@@ -8,7 +8,7 @@ Concevoir une BDD. Stocker des données, les manipuler.
 #1: Création d'un conteneur Docker
 
 - Définir le nom du conteneur
-sudo docker run --name streaming_container -e MYSQL_ROOT_PASSWORD=1234-pw -d mysql
+sudo docker run --name streaming_container -e MYSQL_ROOT_PASSWORD=1234 -d mysql
 
 -Accèder à la liste des conteneurs
 -sudo docker ps
@@ -16,6 +16,12 @@ sudo docker run --name streaming_container -e MYSQL_ROOT_PASSWORD=1234-pw -d mys
 -Accès au conteneur streaming_container
 sudo docker exec -it streaming_container mysql --password
 
+-Connecter l'image
+sudo docker exec -it (id du contener) /bin/bash
+mysql -u root -p
+
+- Copier les fichiers dans le contener
+sudo docker cp [chemin du fichier à copier] [container]:[nom du fichier dans l'image]
 
 ## Contexte du projet
 
@@ -66,7 +72,6 @@ Nous avons aussi besoin de manipulations avancées:
 - Lister grâce à une procédure stockée les films d'un réalisateur donné en paramètre
 - Garder grâce à un trigger une trace de toutes les modifications apportées à la table des utilisateurs. Ainsi, une table d'archive conservera la date de la mise à jour, l'identifiant de l'utilisateur concerné, l'ancienne valeur ainsi que la nouvelle.
 
-A placer dans le *README.md*.
 ​
 ### Contraintes
 
