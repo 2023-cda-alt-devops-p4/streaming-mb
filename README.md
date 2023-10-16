@@ -99,6 +99,7 @@ INSERT INTO
         first_name,
         date_of_birth
     )
+    
 VALUES
 (
         'Dicaprio',
@@ -338,6 +339,12 @@ INSERT INTO
         first_name,
         date_of_birth
     )
+    Values
+    (
+        'Margot',
+        'Robbie',
+        '1990-07-02'
+);
     
 - Supprimer un acteur
 
