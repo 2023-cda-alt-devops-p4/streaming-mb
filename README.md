@@ -301,7 +301,7 @@ INSERT INTO
         title,
         duration,
         year_of_release,
-        id_director
+        director_id
     )
 VALUES
 (
@@ -310,19 +310,22 @@ VALUES
         '2010-02-08',
         (SELECT id
         FROM director
-        WHERE last_name = "Scorsese")
+        WHERE name = 'Scorsese')
     );
+  
 - modification d'un film
 
 UPDATE movie
 SET title = 'Shutter Island',
     duration = 150,
     year_of_release = 2010-02-02,
-    id_director = (SELECT id
+    director_id = (SELECT id
                   FROM director
-                  WHERE last_name = "Scorsese")
-WHERE id = 3;
+                  WHERE name = 'Scorsese')
+                  WHERE id = 3;
+                  
   -les titres et dates de sortie des films du plus récent au plus ancien
+  
 SELECT title, year_of_release
 FROM movie
 ORDER BY year_of_release DESC;
@@ -331,10 +334,11 @@ ORDER BY year_of_release DESC;
 
 INSERT INTO
     actor (
-        last_name,
+        name,
         first_name,
         date_of_birth
     )
+    
 - Supprimer un acteur
 
 DELETE FROM actor
