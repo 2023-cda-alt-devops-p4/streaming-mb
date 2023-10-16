@@ -155,14 +155,46 @@ INSERT INTO
         favorite_movie,
         user_id
 )
---archives à terminer
---les titres et dates de sortie des films du plus récent au plus ancien
+(
+        '2010-02-24',
+        '2023-10-10',
+        'Shutter Island',
+        (SELECT id
+        FROM user
+        WHERE name = "Marie")
+    );
 
-SELECT title, years_of_release
-FROM movie
-ORDER BY year_of_release DESC;
-
---les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
-SELECT name, first_name, date_of_birth
-FROM actor
-ORDER BY
+INSERT INTO
+    archive (
+        update_date,
+        old_value,
+        new_value,
+        password,
+        favorite_movie,
+        user_id
+)
+(
+        '2010-02-24',
+        '2023-10-10',
+        'Last of us',
+        (SELECT id
+        FROM user
+        WHERE name = "Isabelle")
+    );
+INSERT INTO
+    archive (
+        update_date,
+        old_value,
+        new_value,
+        password,
+        favorite_movie,
+        user_id
+)
+(
+        '2010-02-24',
+        '2023-10-10',
+        'Openheimer',
+        (SELECT id
+        FROM user
+        WHERE name = "Paul")
+    );
