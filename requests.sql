@@ -1,6 +1,6 @@
 INSERT INTO
     actor (
-        last_name,
+        name,
         first_name,
         date_of_birth
     )
@@ -21,7 +21,7 @@ VALUES
 
 INSERT INTO
     director (
-        last_name,
+        name,
         first_name
 
     )
@@ -30,10 +30,10 @@ VALUES
         'Scorsese',
         'Martin'
 ),(
-        'Druckmann,',
+        'Druckmann',
         'Neil'
 ),(
-        'Nolan,',
+        'Nolan',
         'Christopher'
 );
 
@@ -43,7 +43,7 @@ INSERT INTO
         title,
         duration,
         year_of_release,
-        id_director
+        director_id
     )
 VALUES
 (
@@ -80,31 +80,49 @@ VALUES
         'Teddy',
         (SELECT id
         FROM actor
-        WHERE name = "Dicaprio")
-    )
-         (SELECT id
+        WHERE name = 'Dicaprio')
+    ,
+        (SELECT id
         FROM movie
-        WHERE name = "Shutter Island")
-    ),(
+        WHERE title = 'Shutter Island')
+    );
+
+INSERT INTO
+    role (
+        name,
+        actor_id,
+        movie_id
+)
+VALUES
+    (
         ' Robert Oppenheimer',
         (SELECT id
         FROM actor
-        WHERE name = "Murphy")
-    )
+        WHERE name = 'Murphy')
+    ,
         (SELECT id
         FROM movie
-        WHERE name = "Oppenheimer")
-    ), (
+        WHERE title = 'Oppenheimer')
+    );
+INSERT INTO
+    role (
+        name,
+        actor_id,
+        movie_id
+)
+VALUES
+     (
         'Last of us',
         (SELECT id
         FROM actor
-        WHERE name = "Pascal")
+        WHERE name = 'Pascal')
+    ,
 
         (SELECT id
         FROM movie
-        WHERE name = "Last of us")
-    )
+        WHERE title = 'Last of us')
     );
+
 INSERT INTO
     user (
         name,
@@ -119,82 +137,108 @@ VALUES
         'Dupont',
         'Paul',
         'dupont.paul@hotmail.com',
-        '123456'
+        '123456',
         'Oppenheimer',
         (SELECT id
         FROM movie
-        WHERE name = "Oppenheimer")
-    ),
+        WHERE title = 'Oppenheimer')
+    );
+
+
+  INSERT INTO
+    user (
+        name,
+        first_name,
+        email,
+        password,
+        favorite_movie,
+        movie_id
+)
+VALUES
 
 (
         'Durant',
         'Marie',
         'durant.marie@hotmail.com',
-        '123456'
+        '123456',
         'Shutter Island',
         (SELECT id
         FROM movie
-        WHERE name = "Shutter Island")
-    ),
+        WHERE title = 'Shutter Island')
+    );
+
+  INSERT INTO
+    user (
+        name,
+        first_name,
+        email,
+        password,
+        favorite_movie,
+        movie_id
+)
+VALUES
 (
         'Dubois',
         'Isabelle',
         'dubois.isabelle@hotmail.com',
-        '123456'
+        '123456',
         'Last of us',
         (SELECT id
         FROM movie
-        WHERE name = "Last of us")
+        WHERE title = 'Last of us')
     );
-INSERT INTO
-    archive (
-        update_date,
-        old_value,
-        new_value,
-        password,
-        favorite_movie,
-        user_id
-)
-(
-        '2010-02-24',
-        '2023-10-10',
-        'Shutter Island',
-        (SELECT id
-        FROM user
-        WHERE name = "Marie")
-    );
+-- INSERT INTO
+--     archive (
+--         update_date,
+--         old_value,
+--         new_value,
+--         password,
+--         favorite_movie,
+--         user_id
+-- )
+-- VALUES
+-- (
+--         '2010-02-24',
 
-INSERT INTO
-    archive (
-        update_date,
-        old_value,
-        new_value,
-        password,
-        favorite_movie,
-        user_id
-)
-(
-        '2010-02-24',
-        '2023-10-10',
-        'Last of us',
-        (SELECT id
-        FROM user
-        WHERE name = "Isabelle")
-    );
-INSERT INTO
-    archive (
-        update_date,
-        old_value,
-        new_value,
-        password,
-        favorite_movie,
-        user_id
-)
-(
-        '2010-02-24',
-        '2023-10-10',
-        'Openheimer',
-        (SELECT id
-        FROM user
-        WHERE name = "Paul")
-    );
+--         'Shutter Island',
+--         (SELECT id
+--         FROM user
+--         WHERE name = "Marie")
+--     );
+
+-- INSERT INTO
+--     archive (
+--         update_date,
+--         old_value,
+--         new_value,
+--         password,
+--         favorite_movie,
+--         user_id
+-- )
+-- VALUES
+-- (
+--         '2010-02-24',
+--         '2023-10-10',
+--         'Last of us',
+--         (SELECT id
+--         FROM user
+--         WHERE name = "Isabelle")
+--     );
+-- INSERT INTO
+--     archive (
+--         update_date,
+--         old_value,
+--         new_value,
+--         password,
+--         favorite_movie,
+--         user_id
+-- )
+-- VALUES
+-- (
+--         '2010-02-24',
+--         '2023-10-10',
+--         'Openheimer',
+--         (SELECT id
+--         FROM user
+--         WHERE name = "Paul")
+--     );

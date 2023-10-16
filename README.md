@@ -24,6 +24,10 @@ sudo docker exec -it (id du contener) mysql -u root -p
 USE nom de la base de donnée
 source (nom d'un fichier copié dans le conteneur ):exemple creation_table.sql)
 
+
+Connection avec un client
+mysql -h localhost -P 4406 --protocol=tcp -u root -p
+
 ## Création d'une base de données stockée dans Docker
 
 # Création de la base de données
@@ -451,3 +455,51 @@ Un dépôt GitHub contenant :
 * [Nicolas Herbez](https://github.com/nicolas-herbez)
 * [Jean-Baptiste Lavisse](https://github.com/jblavisse)
 * [Cyril Marcq](https://github.com/CyrilMarcq)
+# Critères d'évaluation
+
+- [✔️] OK
+- [:x:] NOT OK
+
+*replace check markdown after evaluation*
+
+
+
+## Livrables
+
+Un dépôt GitHub contenant :
+- [ ] L'environnement docker
+- [ ] Le dictionnaire de données
+- [ ] MCD
+- [ ] MPD
+- [ ] MLD
+- [ ] Un fichier permettant de générer la bdd (incluant quelques données)
+- [ ] Le jeu de requêtes dans le *README.md*
+
+## Critères de performance
+
+- [ ] Récupération facile de votre environnement
+- [ ] Exactitude des relations entre les tables
+- [ ] Trigger* mis en place
+- [ ] Bonne présentation des requêtes sur le *README.md*
+- [ ] Exécution des requêtes sans erreur
+
+### Les requêtes
+
+- [ ] Les titres et dates de sortie des films du plus récent au plus ancien
+- [ ] Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
+- [ ] La liste des acteurs/actrices principaux pour un film donné
+- [ ] La liste des films pour un acteur/actrice donné
+- [ ] Ajouter un film
+- [ ] Ajouter un acteur/actrice
+- [ ] Modifier un film
+- [ ] Supprimer un acteur/actrice
+- [ ] Afficher les 3 derniers acteurs/actrices ajouté(e)s
+
+### Procédures
+
+- [ ] Lister grâce à une procédure stockée les films d'un réalisateur donné en paramètre
+
+### Triggers
+
+- [ ] Garder grâce à un trigger une trace de toutes les modifications apportées à la table des utilisateurs. Ainsi, une table d'archive conservera la date de la mise à jour, l'identifiant de l'utilisateur concerné, l'ancienne valeur ainsi que la nouvelle.
+- [ ] Pour chaque entrée dans la base de données, il y aura la date de création et de modification.
