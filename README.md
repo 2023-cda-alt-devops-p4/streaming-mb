@@ -5,30 +5,30 @@
 - Définir le nom du conteneur
 sudo docker run --name streaming_container -e MYSQL_ROOT_PASSWORD=1234 -d mysql
 
- -Lancer le conteneur
+ - Lancer le conteneur
  docker compose up -d
 
--Accèder à la liste des conteneurs
+- Accèder à la liste des conteneurs
 sudo docker ps -a
 
 - Copier les fichiers dans le contener
 sudo docker cp [chemin du fichier à copier] [container]:[nom du fichier dans l'image]
 
--Accès au conteneur
+- Accès au conteneur
 sudo docker exec -it (id du contener) mysql -u root -p
 
--Accès à la base de donnée
+- Accès à la base de donnée
 USE nom de la base de donnée
 source (nom d'un fichier copié dans le conteneur ):exemple creation_table.sql)
 
--Connection avec un client
+- Connection avec un client
 mysql -h localhost -P 4406 --protocol=tcp -u root -p
 
 
 
 ### Création de la base de données
 
--CREATE DATABASE streaming-db;
+- CREATE DATABASE streaming-db;
 
 #### Création des tables
 ```sql
