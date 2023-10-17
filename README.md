@@ -349,23 +349,24 @@ ORDER BY year_of_release DESC;
  ```
 
 - Ajouter un acteur
+  
   ```sql
-
 INSERT INTO
     actor (
         name,
         first_name,
         date_of_birth
-    )
+        )
     Values
     (
         'Margot',
         'Robbie',
         '1990-07-02'
-);
+        );
  ```
     
 - Supprimer un acteur
+
 ```sql
 
 DELETE FROM actor
@@ -373,6 +374,7 @@ WHERE id = 2;
  ```
 
 - Lister les 3 derniers acteurs
+  
   ```sql
 SELECT *, TIMESTAMPDIFF(YEAR, date_of_birth, NOW()) AS age
 FROM actor
@@ -381,6 +383,7 @@ LIMIT 3;
  ```
 
 - Liste d'acteur âgés depuis plus de 30 ans
+
 ```sql
 SELECT
     name,
