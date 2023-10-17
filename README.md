@@ -1,11 +1,6 @@
-# Plateforme de streaming
 
-Concevoir une BDD. Stocker des données, les manipuler.
-![img_svg](./img/movies.svg)
 
-## Installation d'une base de données avec Docker
-
-#1: Création d'un conteneur Docker
+### Création d'un conteneur Docker
 
 - Définir le nom du conteneur
 sudo docker run --name streaming_container -e MYSQL_ROOT_PASSWORD=1234 -d mysql
@@ -21,21 +16,22 @@ sudo docker cp [chemin du fichier à copier] [container]:[nom du fichier dans l'
 
 -Accès au conteneur
 sudo docker exec -it (id du contener) mysql -u root -p
+
+-Accès à la base de donnée
 USE nom de la base de donnée
 source (nom d'un fichier copié dans le conteneur ):exemple creation_table.sql)
 
-
-Connection avec un client
+-Connection avec un client
 mysql -h localhost -P 4406 --protocol=tcp -u root -p
 
-## Création d'une base de données stockée dans Docker
 
-# Création de la base de données
+
+### Création de la base de données
 
 -CREATE DATABASE streaming-db;
 
-# Création des tables
-
+#### Création des tables
+```sql
 CREATE TABLE
     IF NOT EXISTS actor (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -43,14 +39,16 @@ CREATE TABLE
         first_name VARCHAR(150) NOT NULL,
         date_of_birth DATE
     );
-
+```
+```sql
 CREATE TABLE
     IF NOT EXISTS director (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         name VARCHAR(150) NOT NULL,
         first_name VARCHAR(150) NOT NULL
     );
-
+```
+```sql
 CREATE TABLE
     IF NOT EXISTS movie (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -60,7 +58,8 @@ CREATE TABLE
          director_id INT NOT NULL,
         FOREIGN KEY (director_id) REFERENCES director(id) ON DELETE CASCADE
     );
-
+```
+```sql
 CREATE TABLE
     IF NOT EXISTS role (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -70,7 +69,8 @@ CREATE TABLE
         FOREIGN KEY (actor_id) REFERENCES actor(id) ON DELETE CASCADE,
         FOREIGN KEY (movie_id) REFERENCES movie(id) ON DELETE CASCADE
     );
-
+```
+```sql
   CREATE TABLE
     IF NOT EXISTS user (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -82,7 +82,8 @@ CREATE TABLE
         movie_id INT NOT NULL,
         FOREIGN KEY (movie_id) REFERENCES movie(id) ON DELETE CASCADE
     );
-
+```
+```sql
 CREATE TABLE
     IF NOT EXISTS archive (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -92,7 +93,9 @@ CREATE TABLE
         user_id INT NOT NULL,
         FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
     );
-# Valeurs des tables
+```
+### Valeurs des tables
+```sql
 INSERT INTO
     actor (
         last_name,
@@ -114,7 +117,8 @@ VALUES
         'Pedro',
         '1975-04-02'
 );
-
+```
+```sql
 INSERT INTO
     director (
         last_name,
@@ -132,8 +136,8 @@ VALUES
         'Nolan,',
         'Christopher'
 );
-
-
+```
+```sql
 INSERT INTO
     movie (
         title,
@@ -164,7 +168,8 @@ VALUES
         FROM director
         WHERE name = "Druckmann")
     );
-
+```
+```sql
 INSERT INTO
     role (
         name,
@@ -201,6 +206,8 @@ VALUES
         WHERE name = "Last of us")
     )
     );
+```
+```sql
 INSERT INTO
     user (
         name,
@@ -242,6 +249,8 @@ VALUES
         FROM movie
         WHERE name = "Last of us")
     );
+```
+```sql
 INSERT INTO
     archive (
         update_date,
@@ -259,7 +268,8 @@ INSERT INTO
         FROM user
         WHERE name = "Marie")
     );
-
+```
+```sql
 INSERT INTO
     archive (
         update_date,
@@ -277,6 +287,8 @@ INSERT INTO
         FROM user
         WHERE name = "Isabelle")
     );
+```
+```sql
 INSERT INTO
     archive (
         update_date,
@@ -294,9 +306,11 @@ INSERT INTO
         FROM user
         WHERE name = "Paul")
     );
-# Requêtes
+```
+### Requêtes
 
 - Ajouter un film
+  ```sql
 INSERT INTO
     movie (
         title,
@@ -313,9 +327,11 @@ VALUES
         FROM director
         WHERE name = 'Scorsese')
     );
+    ```
   
 - modification d'un film
-
+  
+  ```sql
 UPDATE movie
 SET title = 'Shutter Island',
     duration = 150,
@@ -324,14 +340,16 @@ SET title = 'Shutter Island',
                   FROM director
                   WHERE name = 'Scorsese')
                   WHERE id = 3;
-                  
+                  ```
   -les titres et dates de sortie des films du plus récent au plus ancien
-  
+  ```sql
 SELECT title, year_of_release
 FROM movie
 ORDER BY year_of_release DESC;
+ ```
 
 - Ajouter un acteur
+  ```sql
 
 INSERT INTO
     actor (
@@ -345,127 +363,35 @@ INSERT INTO
         'Robbie',
         '1990-07-02'
 );
+ ```
     
 - Supprimer un acteur
+```sql
 
 DELETE FROM actor
 WHERE id = 2;
+ ```
 
 - Lister les 3 derniers acteurs
+  ```sql
 SELECT *, TIMESTAMPDIFF(YEAR, date_of_birth, NOW()) AS age
 FROM actor
 ORDER BY id DESC
 LIMIT 3;
+ ```
 
 - Liste d'acteur âgés depuis plus de 30 ans
+```sql
 SELECT
     name,
     first_name,
     TIMESTAMPDIFF(YEAR, date_of_birth, NOW()) AS age
 FROM actor
 ORDER BY name ASC;
+ ```
 
 
 
-## Contexte du projet
-
-En tant que développeur passionné par le cinéma, vous avez toujours été fasciné par la magie du grand écran. Cette passion ne se limite pas seulement à regarder des films. Vous avez toujours été curieux de connaître les coulisses, d'étudier qui a joué dans tel film, qui l'a réalisé, et comment ces chefs-d'œuvre ont été créés. Vous trouvez aussi que les plateformes de streaming sont un formidable accès à un catalogue d'oeuvres de toute sorte à découvrir.
-
-Vous avez donc envie de créer, vous aussi, votre propre plateforme de streaming sur votre temps libre.
-
-Mais comme Rome ne s'est pas construite en un jour, vous voulez commencer par la mise en place d'un site web permettant de procéder à différentes opérations de recherches à propos de films, d'acteurs/actrices ou de réalisateurs.
-
-Sauf que. La partie site web n'est pas pour tout de suite 😃
-
-Avant celà, vous avez besoin d'une base de données pour le stockage. Et donc de la concevoir et la mettre en place!
-
-A vous de jouer 🙂
-
-## Modalités pédagogiques
-
-**Activité individuelle en mode collaboratif.**
-
-### Structure de la base de donnée
-
-*Les films*
-Un film comporte un titre, un ou plusieurs acteurs, un réalisateur, une durée et l'année de sa sortie.
-
-*Les acteurs, actrices*
-Nom, prénom, rôle et date de naissance.
-
-*Les réalisateurs*
-Nom et prénom.
-
-*Les utilisateurs*
-Nom, prénom, email, mot de passe, rôle et liste des films préférés.
-
-### Les requêtes
-
-Voici un jeu de requêtes minimal à fournir pour tester votre bdd :
-- les titres et dates de sortie des films du plus récent au plus ancien
-- les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
-- la liste des acteurs/actrices principaux pour un film donné
-- la liste des films pour un acteur/actrice donné
-- ajouter un film
-- ajouter un acteur/actrice
-- modifier un film
-- supprimer un acteur/actrice
-- afficher les 3 derniers acteurs/actrices ajouté(e)s
-
-Nous avons aussi besoin de manipulations avancées:
-- Lister grâce à une procédure stockée les films d'un réalisateur donné en paramètre
-- Garder grâce à un trigger une trace de toutes les modifications apportées à la table des utilisateurs. Ainsi, une table d'archive conservera la date de la mise à jour, l'identifiant de l'utilisateur concerné, l'ancienne valeur ainsi que la nouvelle.
-
-​
-### Contraintes
-
-- Le noSQL (MongoDB...) n'est pas autorisé
-- Vous devez créer votre propre environnement Docker
-- Un *trigger* doit être mis en place, également appelé déclencheur
-
-- Seul l'administrateur de la BDD pourra ajouter, modifier ou supprimer des données.
-- Pour chaque entrée dans la base de données, il y aura la date de création et de modification.
-
-
-### Deadline
-
-4 jours.
-
-## Modalités d'évaluation
-
-Correction entre pairs.
-Vos requêtes seront testées en local après l'importation de votre environnemnt docker.
-
-## Livrables
-
-Un dépôt GitHub contenant :
-- l'environnement docker
-- le dictionnaire de données
-- MCD
-- MPD
-- MLD
-- un fichier permettant de générer la bdd (incluant quelques données)
-- le jeu de requêtes dans le *README.md*
-
-## Critères de performance
-
-- Récupération facile de votre environnement
-- Exactitude des relations entre les tables
-- *Trigger* mis en place
-- Bonne présentation des requêtes sur le *README.md*
-- Exécution des requêtes sans erreur
-
-## Ressources
-
-- [Comprendre les bases de données](https://www.base-de-donnees.com/comprendre-bases-de-donnees)
-- [Modèle Conceptuel des Données](https://www.base-de-donnees.com/mcd)
-- [Langage SQL](https://sql.sh)
-
-## Auteurs, contributeurs
-
-* [Nicolas Herbez](https://github.com/nicolas-herbez)
-* [Jean-Baptiste Lavisse](https://github.com/jblavisse)
-* [Cyril Marcq](https://github.com/CyrilMarcq)
 # Critères d'évaluation
 
 - [✔️] OK
@@ -478,33 +404,34 @@ Un dépôt GitHub contenant :
 ## Livrables
 
 Un dépôt GitHub contenant :
-- [ ] L'environnement docker
-- [ ] Le dictionnaire de données
-- [ ] MCD
-- [ ] MPD
-- [ ] MLD
-- [ ] Un fichier permettant de générer la bdd (incluant quelques données)
-- [ ] Le jeu de requêtes dans le *README.md*
+
+- [✔️] L'environnement docker
+- [✔️] Le dictionnaire de données
+- [✔️] MCD
+- [✔️] MPD
+- [✔️] MLD
+- [✔️] Un fichier permettant de générer la bdd (incluant quelques données)
+- [✔️] Le jeu de requêtes dans le _README.md_
 
 ## Critères de performance
 
-- [ ] Récupération facile de votre environnement
-- [ ] Exactitude des relations entre les tables
-- [ ] Trigger* mis en place
-- [ ] Bonne présentation des requêtes sur le *README.md*
-- [ ] Exécution des requêtes sans erreur
+- [✔️] Récupération facile de votre environnement
+- [✔️] Exactitude des relations entre les tables
+- [ ] Trigger\* mis en place
+- [✔️] Bonne présentation des requêtes sur le _README.md_
+- [✔️] Exécution des requêtes sans erreur
 
 ### Les requêtes
 
-- [ ] Les titres et dates de sortie des films du plus récent au plus ancien
-- [ ] Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
-- [ ] La liste des acteurs/actrices principaux pour un film donné
-- [ ] La liste des films pour un acteur/actrice donné
-- [ ] Ajouter un film
-- [ ] Ajouter un acteur/actrice
-- [ ] Modifier un film
-- [ ] Supprimer un acteur/actrice
-- [ ] Afficher les 3 derniers acteurs/actrices ajouté(e)s
+- [✔️] Les titres et dates de sortie des films du plus récent au plus ancien
+- [✔️] Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
+- [✔️] La liste des acteurs/actrices principaux pour un film donné
+- [✔️] La liste des films pour un acteur/actrice donné
+- [✔️] Ajouter un film
+- [✔️] Ajouter un acteur/actrice
+- [✔️] Modifier un film
+- [✔️] Supprimer un acteur/actrice
+- [✔️] Afficher les 3 derniers acteurs/actrices ajouté(e)s
 
 ### Procédures
 
